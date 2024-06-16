@@ -1,0 +1,56 @@
+ОБЯЗАТЕЛЬНО ПРОПИСАТЬ В НАЧАЛЕ КОДА ИНАЧЕ НЕ БУДЕТ РАБОТАТЬ
+
+using MySql.Data.MySqlClient;
+
+
+Когда будешь кодировать чтобы при нажатии на кнопку открывалось следующее окно нужно будет ввести комманду
+
+Form2 fm2 = new Form2();
+
+// Где Form 2 это конкретное окно, куда нам нужно попасть
+, а fm2 - название переменной, его можно менять
+
+
+КОД ДЛЯ ВЫВЕДЕНИЯ ИЗ БАЗЫ ДАННЫX
+
+
+private void button1_Click(object sender, EventArgs e)
+
+// создаем объект для подключения к базе данных string ConnStr = "server=localhost;port=3306;user=root;password=root;database-названиебазыданныx"; conn = new MySqlConnection(ConnStr);
+
+MySqlConnection conn.Open();
+
+I
+
+// создаем запрос на выборку данных string query = "SELECT * FROM названиебазыданныx";
+
+// создаем объект для выполнения запроса
+
+MySqlCommand command = new MySqlCommand(query, conn);
+
+MySqlDataAdapter mysql_dataAdapter = new MySqlDataAdapter(query, conn);
+
+DataTable table = new DataTable();
+
+// заполняет форму в соответствии с количеством стоблцов this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode. Fill;
+
+mySql_dataAdapter.Fill(table);
+
+this.dataGridView1.DataSource = table;
+
+
+
+ДЛЯ СОЗДАНИЯ ОКНА АВТОРИЗАЦИИ используется комбо бокс (прямо оттуда же берешь, откуда и текст и кнопки)
+
+Чтобы комбобокс работал, нужно прописать команду, нажав дважды на комбобокс
+
+
+for (int i = 0; i < users.Rows.Count; i++
+{
+	comboBox1.Items.Add(users.Rows[i]["названиебазыданныx"];
+} 
+
+
+
+
+

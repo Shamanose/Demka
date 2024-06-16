@@ -1,0 +1,140 @@
+Класс БД:
+
+//Создание строки подключения
+MySqlConnection mySqlConnection = new MySqlConnection("server=localhost;uid=root;pwd=123;database=dbtheater");
+
+//Создание подключения бд к интерфейсу
+public void openConnection()
+{
+    if (mySqlConnection.State == System.Data.ConnectionState.Closed)
+    {
+
+        mySqlConnection.Open();
+    }
+}
+
+//Закрытие подключения бд к интерфейсу
+public void closeConnection()
+{
+    if (mySqlConnection.State == System.Data.ConnectionState.Open)
+    {
+        mySqlConnection.Close();
+    }
+}
+
+//Получение подключения бд к интерфейсу
+public MySqlConnection getConnection()
+{
+    return mySqlConnection;
+}
+
+Форма БД:
+
+//Создание объекта класса бд
+dbTheater db_theater = new dbTheater(); 
+
+//Инициализация компонентов
+public authentForm()
+{
+    InitializeComponent();
+}
+
+//Загрузка данных в DataGridView
+private void LoadDataIntoDataGridView(string tableName)
+{
+    try
+    {
+        {
+            db_theater.openConnection();
+
+            // Создание команды для выборки данных из таблиц
+            string query = "SELECT * FROM " + tableName;
+            using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, db_theater.getConnection()))
+            {
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+
+                // Заполнение DataGridView данными из DataTable
+                dataGridView1.DataSource = dataTable;
+            }
+        }
+    }
+
+    //Обработка ошибок
+    catch (MySqlException ex)
+    {
+        MessageBox.Show(ex.ToString());
+    }
+}
+
+private void button1_Click(object sender, EventArgs e)
+{
+
+}
+
+//Выгрузка данных по кнопке
+private void button2_Click(object sender, EventArgs e)
+{
+    LoadDataIntoDataGridView("actors");
+    db_theater.closeConnection();
+}
+
+Форма авторизации:
+
+//Создание объекта класса бд
+dbTheater db_theater = new dbTheater();
+
+//Логины и пароли пользователей
+private string storedLogin1 = "director";
+private string storedPassword1 = "q1w2";
+
+private string storedLogin2 = "administrator";
+private string storedPassword2 = "q1w2e3";
+
+private string storedLogin3 = "operator";
+private string storedPassword3 = "q1w2e3r4";
+
+private string storedLogin4 = "adminDB";
+private string storedPassword4 = "12345";
+
+//Инициализация компонентов
+public Form1()
+{
+    InitializeComponent();
+}
+
+//Авторизация
+private void button1_Click(object sender, EventArgs e)
+{
+    string enteredLogin = loginTextBox.Text;
+    string enteredPassword = pwdTextBox.Text;
+
+    if (enteredLogin == storedLogin1 && enteredPassword == storedPassword1)
+    {
+        // Открыть форму администратора
+        adminForm mainForm = new adminForm();
+        mainForm.Show();
+        this.Hide();
+    }
+    else if (enteredLogin == storedLogin2 && enteredPassword == storedPassword2)
+    {
+        // Открыть форму сотрудника
+        employeeForm mainForm = new employeeForm();
+        mainForm.Show();
+        this.Hide();
+    }
+    else if (enteredLogin == storedLogin3 && enteredPassword == storedPassword3)
+    {
+        // Открыть форму сотрудника
+        ticketForm mainForm = new ticketForm();
+        mainForm.Show();
+        this.Hide();
+    }
+    else if (enteredLogin == storedLogin4 && enteredPassword == storedPassword4)
+    {
+        // Открыть форму сотрудника
+        adminForm mainForm = new adminForm();
+        mainForm.Show();
+        this.Hide();
+    }
+}
