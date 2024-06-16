@@ -57,6 +57,25 @@ for (int i = 0; i < users.Rows.Count; i++
 	comboBox1.Items.Add(users.Rows[i]["названиеколонкибазыданныx"];
 } 
 
+Добавим команду чтобы переключаться На странички взависимости от выбора
+
+	{
+		if (textBox1.Text == "название юзера"
+	{
+		if (textBox2.Text == "название юзера"
+	{	Form2 f2 = new Form2();
+	} 
+	} 
+	} 
+
+{
+		if (textBox1.Text == "название юзера"
+	{
+		if (textBox2.Text == "название юзера"
+	{	Form3 f3 = new Form3();
+	} 
+	} 
+	} 
 
 
 
